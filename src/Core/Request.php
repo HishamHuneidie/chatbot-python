@@ -2,6 +2,7 @@
 
 namespace Core;
 use DateTime;
+use Exception;
 
 class Request {
 
@@ -23,7 +24,7 @@ class Request {
         $this->get = $_GET;
         $this->post = $_POST;
         $this->cookies = $_COOKIE;
-        $this->content = "";
+        $this->processContent();
         $this->scheme = $_SERVER['REQUEST_SCHEME'];
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->agent = $_SERVER['HTTP_USER_AGENT'];
@@ -35,6 +36,16 @@ class Request {
         $timestamp = (int)$_SERVER['REQUEST_TIME'] * 100;
         $date = date(self::DEFAULT_DATE_FORMAT, $timestamp);
         $this->time = new DateTime($date);
+    }
+
+    private function processContent(): void
+    {
+        try {
+            $requestBody = file_get_contents('php://input');
+            $this->content = $requestBody;
+        } catch(Exception $e) {
+            $this->content = "";
+        }
     }
 
     public static function getInstance(): static

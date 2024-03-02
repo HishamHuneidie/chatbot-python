@@ -14,17 +14,15 @@ class IndexController extends AbstractController {
     {
         return $this->render("index/index.php", [
             "uno" => 111,
+            "request" => $request->getContent(),
         ]);
     }
 
     /**
      * @Route["/python"]
      */
-    public function python(): string
+    public function python(Request $request): string
     {
-        // $time = date("Y-m-d H:i:s", 183792992980);
-        // $date = new DateTime($time);
-        // dump($date->getTimestamp());
         return "Rengering python";
     }
 }

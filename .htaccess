@@ -1,0 +1,12 @@
+RewriteEngine On
+
+DirectoryIndex public/index.php
+Options -MultiViews -Indexes
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+	RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.jpeg|\.gif|\.txt|\.pdf|\.mp3|\.mp4|\.ttf|\.woff2)$ [NC]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^(.+)$ public/index.php [QSA,L]
+</IfModule>

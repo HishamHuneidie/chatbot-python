@@ -1,0 +1,23 @@
+{
+    "name": "hisham/chatbot-python",
+    "description": "This is a chatbot project created in python and php for restaurants",
+    "type": "project",
+    "require": {
+        "ext-yaml": "*",
+        "ext-pcntl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hisham\\ChatbotPython\\": "src/"
+        },
+        "files": [
+            "config/functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Hisham Huneidie"
+        }
+    ],
+    "minimum-stability": "stable"
+}

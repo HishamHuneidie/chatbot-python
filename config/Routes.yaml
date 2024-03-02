@@ -1,0 +1,12 @@
+---
+updated: "2024-03-02 19:13:41"
+routes:
+- pattern: ^/$
+  controller: IndexController
+  method: index
+  arguments: []
+- pattern: ^/python$
+  controller: IndexController
+  method: python
+  arguments: []
+...

@@ -15,6 +15,11 @@ RUN apt-get update \
 
 RUN pecl install yaml-2.2.3 \
     && docker-php-ext-enable yaml
+RUN pecl install -f xdebug \
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini;
+COPY xdebug-vars.ini /xdebug-vars.ini
+RUN echo "$(cat /xdebug-vars.ini)" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && rm /xdebug-vars.ini
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install zip
@@ -34,3 +39,4 @@ RUN a2enmod rewrite
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 WORKDIR /var/www/html
+EXPOSE 9003

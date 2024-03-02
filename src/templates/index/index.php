@@ -7,5 +7,7 @@
 </head>
 <body>
     <p>Rendering python <?php echo $uno; ?></p>
+
+    <script src="/public/src/js/main.js"></script>
 </body>
 </html>

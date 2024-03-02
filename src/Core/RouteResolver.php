@@ -12,6 +12,7 @@ class RouteResolver {
     private array $server;
     private array $routes;
     private Logger $logger;
+    private Request $request;
 
     public function __construct(
         array $env,
@@ -21,6 +22,7 @@ class RouteResolver {
         $this->env = $env;
         $this->server = $server;
         $this->logger = new Logger($this->server);
+        $this->request = Request::getInstance();
         $pid = pcntl_fork();
     
         if ($pid == -1) {
@@ -161,6 +163,7 @@ class RouteResolver {
             "arguments" => [],
         ]);
         $this->executeRoute($route);
+        die;
 
     }
 
@@ -172,6 +175,6 @@ class RouteResolver {
         require_once $file;
         $this->logger->info("Route found. {$controllerName}::{$method}()");
         $controller = new $controllerName();
-        print $controller->$method(...$route->getArguments());
+        print $controller->$method($this->request);
     }
 }
